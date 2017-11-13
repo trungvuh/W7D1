@@ -1,4 +1,4 @@
-// webpack.config.js
+
 var path = require('path');
 
 module.exports = {
