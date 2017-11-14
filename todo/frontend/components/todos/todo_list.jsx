@@ -1,8 +1,9 @@
 import React from 'react';
 import ToDoListItem from './todo_list/todo_list_item';
 import TodoForm from './todo_list/todo_form';
+// import receiveTodo from '../../actions/todo_actions';
 
-const TodoList = ({todos}) => (
+const TodoList = ({todos, receiveTodo}) => (
   <div>
     <h1>Our Todo List</h1>
     <ul>
@@ -13,7 +14,7 @@ const TodoList = ({todos}) => (
       }
     </ul>
     <br />
-    <TodoForm />
+    <TodoForm receiveTodo={receiveTodo}/>
   </div>
 );
 

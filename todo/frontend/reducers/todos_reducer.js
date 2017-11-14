@@ -1,13 +1,13 @@
 import { RECEIVE_TODO, RECEIVE_TODOS } from '../actions/todo_actions';
 
 const initialState = {
-  0: {
+  1: {
     id: 1,
     title: 'wash car',
     body: 'with soap',
     done: false
   },
-  1: {
+  2: {
     id: 2,
     title: 'wash dog',
     body: 'with shampoo',
@@ -27,7 +27,9 @@ const todosReducer = (state = initialState, action) => {
       return newState;
 
     case RECEIVE_TODO:
-      newState = Object.assign({}, state, action.todo);
+      newState = Object.assign({}, state);
+      newState[action.todo.id] = action.todo;
+      // debugger;
       return newState;
     default:
       return state;
