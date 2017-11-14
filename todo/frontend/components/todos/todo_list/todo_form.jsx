@@ -1,11 +1,10 @@
 import React from 'react';
-
+import { uniqueId } from '../../../util/uniq';
 
 class TodoForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.uniqueId(),
       title: "",
       body: "",
       done: false
@@ -14,18 +13,14 @@ class TodoForm extends React.Component {
     this.updateTodo = this.updateTodo.bind(this);
   }
 
-  updateTodo(event) {
-    this.setState({title: event.target.value.title, body: event.target.value.body});
-  }
-
-  uniqueId() {
-    return new Date().getTime();
+  updateTodo(property) {
+    return event => this.setState({[property]: event.target.value});
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    // debugger;
-    this.props.receiveTodo(this.state);
+    let todo = Object.assign({}, this.state, { id: uniqueId() });
+    this.props.receiveTodo(todo);
     this.setState({ title: "", body: ""});
   }
 
@@ -35,20 +30,19 @@ class TodoForm extends React.Component {
 
         <h2>New Todo Item</h2>
         <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            onChange={this.updateTodo}
-            value={this.state.title} >
-            Title
-          </input>
-
-          <input
-            type="text"
-            onChange={this.updateTodo}
-            value={this.state.body} >
-          Body
-          </input>
-
+          <label>Title
+            <input
+              type="text"
+              onChange={this.updateTodo('title')}
+              value={this.state.title} />
+          </label>
+        <br />
+          <label> Body
+            <input
+              type="text"
+              onChange={this.updateTodo('body')}
+              value={this.state.body} />
+          </label>
 
           <button>Add item</button>
         </form>
