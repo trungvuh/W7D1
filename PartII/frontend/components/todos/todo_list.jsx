@@ -5,9 +5,13 @@ import TodoForm from './todo_list/todo_form';
 
 class TodoList extends React.Component {
 
+  componentDidMount () {
+    this.props.fetchTodos();
+  }
+
 
   render() {
-    let {todos, receiveTodo } = this.props;
+    let { todos, createTodo, errors } = this.props;
     return (
       <div>
         <h1>Our Todo List</h1>
@@ -19,7 +23,7 @@ class TodoList extends React.Component {
           }
         </ul>
         <br />
-        <TodoForm receiveTodo={receiveTodo}/>
+        <TodoForm errors={errors} createTodo={createTodo}/>
       </div>
     );
   }

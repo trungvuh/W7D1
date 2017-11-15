@@ -20,11 +20,13 @@ class TodoForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     let todo = Object.assign({}, this.state, { id: uniqueId() });
-    this.props.receiveTodo(todo);
-    this.setState({ title: "", body: ""});
+    this.props.createTodo({todo}).then(
+      () => this.setState({ title: "", body: ""})
+    );
   }
 
   render () {
+    let { errors } = this.props;
     return (
       <div>
 
@@ -46,6 +48,15 @@ class TodoForm extends React.Component {
 
           <button>Add item</button>
         </form>
+
+        <h3>Errors</h3>
+        <ul>
+          {
+            errors.map ((error, index) => (
+              <li key={index}>{error}</li>
+            ))
+          }
+        </ul>
 
       </div>
     );
