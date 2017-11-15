@@ -765,7 +765,7 @@ function isPlainObject(value) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.createTodo = exports.fetchTodos = exports.receiveTodo = exports.receiveTodos = exports.RECEIVE_TODO = exports.RECEIVE_TODOS = undefined;
+exports.createTodo = exports.fetchTodos = exports.removeTodo = exports.receiveTodo = exports.receiveTodos = exports.REMOVE_TODO = exports.RECEIVE_TODO = exports.RECEIVE_TODOS = undefined;
 
 var _todo_api_util = __webpack_require__(63);
 
@@ -777,6 +777,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var RECEIVE_TODOS = exports.RECEIVE_TODOS = 'RECEIVE_TODOS';
 var RECEIVE_TODO = exports.RECEIVE_TODO = 'RECEIVE_TODO';
+var REMOVE_TODO = exports.REMOVE_TODO = 'REMOVE_TODO';
 
 var receiveTodos = exports.receiveTodos = function receiveTodos(todos) {
   return {
@@ -788,6 +789,13 @@ var receiveTodos = exports.receiveTodos = function receiveTodos(todos) {
 var receiveTodo = exports.receiveTodo = function receiveTodo(todo) {
   return {
     type: RECEIVE_TODO,
+    todo: todo
+  };
+};
+
+var removeTodo = exports.removeTodo = function removeTodo(todo) {
+  return {
+    type: REMOVE_TODO,
     todo: todo
   };
 };
@@ -20088,6 +20096,9 @@ var todosReducer = function todosReducer() {
       newState[action.todo.id] = action.todo;
       // debugger;
       return newState;
+
+    case _todo_actions.REMOVE_TODO:
+
     default:
       return state;
   }
